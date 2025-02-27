@@ -1,0 +1,115 @@
+blueprint:
+  name: Zigbee - Tuya 2-Button Scene Switch (Device-based)
+  description: Automate your Tuya 2-Button Scene Switch via Zigbee (non-MQTT).
+  domain: automation
+  input:
+    switch:
+      name: Tuya 2-Button Scene Switch
+      description: Select your Tuya switch device
+      selector:
+        device:
+          integration: zha  # Change to "deconz" or "zigbee2mqtt" if needed
+    button_one_short_press:
+      name: Single Press - Button 1
+      description: Action to run on button 1 (lower-left) single press
+      default: []
+      selector:
+        action: {}
+    button_one_double_press:
+      name: Double Press - Button 1
+      description: Action to run on button 1 (lower-left) double press
+      default: []
+      selector:
+        action: {}
+    button_one_long_press:
+      name: Long Press - Button 1
+      description: Action to run on button 1 (lower-left) long press
+      default: []
+      selector:
+        action: {}
+    button_two_short_press:
+      name: Single Press - Button 2
+      description: Action to run on button 2 (lower-right) single press
+      default: []
+      selector:
+        action: {}
+    button_two_double_press:
+      name: Double Press - Button 2
+      description: Action to run on button 2 (lower-right) double press
+      default: []
+      selector:
+        action: {}
+    button_two_long_press:
+      name: Long Press - Button 2
+      description: Action to run on button 2 (lower-right) long press
+      default: []
+      selector:
+        action: {}
+
+mode: restart
+max_exceeded: silent
+
+trigger:
+  - platform: device
+    device_id: !input switch
+    domain: zha  # Change to your integration if necessary
+    type: remote_button_short_press
+    subtype: button_1
+    id: button_one_short
+  - platform: device
+    device_id: !input switch
+    domain: zha
+    type: remote_button_double_press
+    subtype: button_1
+    id: button_one_double
+  - platform: device
+    device_id: !input switch
+    domain: zha
+    type: remote_button_long_press
+    subtype: button_1
+    id: button_one_long
+  - platform: device
+    device_id: !input switch
+    domain: zha
+    type: remote_button_short_press
+    subtype: button_2
+    id: button_two_short
+  - platform: device
+    device_id: !input switch
+    domain: zha
+    type: remote_button_double_press
+    subtype: button_2
+    id: button_two_double
+  - platform: device
+    device_id: !input switch
+    domain: zha
+    type: remote_button_long_press
+    subtype: button_2
+    id: button_two_long
+
+action:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: button_one_short
+        sequence: !input button_one_short_press
+      - conditions:
+          - condition: trigger
+            id: button_one_double
+        sequence: !input button_one_double_press
+      - conditions:
+          - condition: trigger
+            id: button_one_long
+        sequence: !input button_one_long_press
+      - conditions:
+          - condition: trigger
+            id: button_two_short
+        sequence: !input button_two_short_press
+      - conditions:
+          - condition: trigger
+            id: button_two_double
+        sequence: !input button_two_double_press
+      - conditions:
+          - condition: trigger
+            id: button_two_long
+        sequence: !input button_two_long_press
