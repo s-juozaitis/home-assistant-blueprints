@@ -15,7 +15,6 @@ blueprint:
       selector:
         device:
           integration: zha
-          domain: light
     button_one_short_press:
       name: Single Press - Button 1
       description: Action to run on button 1 (short press)
@@ -74,7 +73,7 @@ action:
           - repeat:
               until:
                 - condition: template
-                  value_template: "{{ state_attr('light.' + (input_light_device | device_entities | select('search', 'light') | list | first), 'brightness') | int >= 255 }}"
+                  value_template: "{{ state_attr('light.' + (light_device | device_entities | select('search', 'light') | list | first), 'brightness') | int >= 255 }}"
               sequence:
                 - service: light.turn_on
                   data:
@@ -89,7 +88,7 @@ action:
           - repeat:
               until:
                 - condition: template
-                  value_template: "{{ state_attr('light.' + (input_light_device | device_entities | select('search', 'light') | list | first), 'brightness') | int <= 0 }}"
+                  value_template: "{{ state_attr('light.' + (light_device | device_entities | select('search', 'light') | list | first), 'brightness') | int <= 0 }}"
               sequence:
                 - service: light.turn_on
                   data:
