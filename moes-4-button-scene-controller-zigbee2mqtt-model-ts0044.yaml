@@ -3,7 +3,6 @@ blueprint:
   description: >
     Controls various entities based on single and double press actions from a Moes 4-Button Scene Switch.
   domain: automation
-
   input:
     switch_device:
       name: Zigbee Device
@@ -221,5 +220,5 @@ action:
           - condition: trigger
             id: button_4_hold
         sequence: !input hold_4
-        
+
 mode: single
