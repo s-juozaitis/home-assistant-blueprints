@@ -3,6 +3,7 @@ blueprint:
   description: >
     Controls various entities based on single, double, and long press actions from a Moes 4-Button Scene Switch using ZHA.
   domain: automation
+
   input:
     switch_device:
       name: Zigbee Device
@@ -13,66 +14,43 @@ blueprint:
 
     single_1:
       name: Action for 1 Single Press
-      description: Action to run when button 1 is single pressed.
       selector:
         action: {}
     single_2:
       name: Action for 2 Single Press
-      description: Action to run when button 2 is single pressed.
       selector:
         action: {}
     single_3:
       name: Action for 3 Single Press
-      description: Action to run when button 3 is single pressed.
       selector:
         action: {}
     single_4:
       name: Action for 4 Single Press
-      description: Action to run when button 4 is single pressed.
       selector:
         action: {}
 
+    # Optional actions (remove requirement)
     double_1:
       name: Action for 1 Double Press
-      description: Action to run when button 1 is double pressed.
       selector:
         action: {}
+      default: []
     double_2:
       name: Action for 2 Double Press
-      description: Action to run when button 2 is double pressed.
       selector:
         action: {}
-    double_3:
-      name: Action for 3 Double Press
-      description: Action to run when button 3 is double pressed.
-      selector:
-        action: {}
-    double_4:
-      name: Action for 4 Double Press
-      description: Action to run when button 4 is double pressed.
-      selector:
-        action: {}
-
+      default: []
+    
     hold_1:
       name: Action for 1 Hold Press
-      description: Action to run when button 1 is held.
       selector:
         action: {}
+      default: []
     hold_2:
       name: Action for 2 Hold Press
-      description: Action to run when button 2 is held.
       selector:
         action: {}
-    hold_3:
-      name: Action for 3 Hold Press
-      description: Action to run when button 3 is held.
-      selector:
-        action: {}
-    hold_4:
-      name: Action for 4 Hold Press
-      description: Action to run when button 4 is held.
-      selector:
-        action: {}
+      default: []
 
 trigger:
   - platform: device
@@ -103,6 +81,7 @@ trigger:
     subtype: button_4
     id: button_4_single
 
+  # Optional triggers (won't break if not used)
   - platform: device
     device_id: !input switch_device
     domain: zha
@@ -120,20 +99,6 @@ trigger:
   - platform: device
     device_id: !input switch_device
     domain: zha
-    type: remote_button_double_press
-    subtype: button_3
-    id: button_3_double
-
-  - platform: device
-    device_id: !input switch_device
-    domain: zha
-    type: remote_button_double_press
-    subtype: button_4
-    id: button_4_double
-
-  - platform: device
-    device_id: !input switch_device
-    domain: zha
     type: remote_button_long_press
     subtype: button_1
     id: button_1_hold
@@ -144,20 +109,6 @@ trigger:
     type: remote_button_long_press
     subtype: button_2
     id: button_2_hold
-
-  - platform: device
-    device_id: !input switch_device
-    domain: zha
-    type: remote_button_long_press
-    subtype: button_3
-    id: button_3_hold
-
-  - platform: device
-    device_id: !input switch_device
-    domain: zha
-    type: remote_button_long_press
-    subtype: button_4
-    id: button_4_hold
 
 action:
   - choose:
@@ -181,6 +132,7 @@ action:
             id: button_4_single
         sequence: !input single_4
 
+      # Optional actions (will be ignored if no input provided)
       - conditions:
           - condition: trigger
             id: button_1_double
@@ -193,16 +145,6 @@ action:
 
       - conditions:
           - condition: trigger
-            id: button_3_double
-        sequence: !input double_3
-
-      - conditions:
-          - condition: trigger
-            id: button_4_double
-        sequence: !input double_4
-
-      - conditions:
-          - condition: trigger
             id: button_1_hold
         sequence: !input hold_1
 
@@ -210,15 +152,5 @@ action:
           - condition: trigger
             id: button_2_hold
         sequence: !input hold_2
-
-      - conditions:
-          - condition: trigger
-            id: button_3_hold
-        sequence: !input hold_3
-
-      - conditions:
-          - condition: trigger
-            id: button_4_hold
-        sequence: !input hold_4
 
 mode: restart
