@@ -163,63 +163,63 @@ trigger:
 action:
   - choose:
       - conditions:
-          - condition: template
-            value_template: "{{ trigger.payload == '1_single' }}"
+          - condition: trigger
+            id: button_1_single
         sequence: !input single_1
 
       - conditions:
-          - condition: template
-            value_template: "{{ trigger.payload == '2_single' }}"
+          - condition: trigger
+            id: button_2_single
         sequence: !input single_2
 
       - conditions:
-          - condition: template
-            value_template: "{{ trigger.payload == '3_single' }}"
+          - condition: trigger
+            id: button_3_single
         sequence: !input single_3
 
       - conditions:
-          - condition: template
-            value_template: "{{ trigger.payload == '4_single' }}"
+          - condition: trigger
+            id: button_4_single
         sequence: !input single_4
 
       - conditions:
-          - condition: template
-            value_template: "{{ trigger.payload == '1_double' }}"
+          - condition: trigger
+            id: button_1_double
         sequence: !input double_1
 
       - conditions:
-          - condition: template
-            value_template: "{{ trigger.payload == '2_double' }}"
+          - condition: trigger
+            id: button_2_double
         sequence: !input double_2
 
       - conditions:
-          - condition: template
-            value_template: "{{ trigger.payload == '3_double' }}"
+          - condition: trigger
+            id: button_3_double
         sequence: !input double_3
 
       - conditions:
-          - condition: template
-            value_template: "{{ trigger.payload == '4_double' }}"
+          - condition: trigger
+            id: button_4_double
         sequence: !input double_4
 
       - conditions:
-          - condition: template
-            value_template: "{{ trigger.payload == '1_hold' }}"
+          - condition: trigger
+            id: button_1_hold
         sequence: !input hold_1
 
       - conditions:
-          - condition: template
-            value_template: "{{ trigger.payload == '2_hold' }}"
+          - condition: trigger
+            id: button_2_hold
         sequence: !input hold_2
 
       - conditions:
-          - condition: template
-            value_template: "{{ trigger.payload == '3_hold' }}"
+          - condition: trigger
+            id: button_3_hold
         sequence: !input hold_3
 
       - conditions:
-          - condition: template
-            value_template: "{{ trigger.payload == '4_hold' }}"
+          - condition: trigger
+            id: button_4_hold
         sequence: !input hold_4
-
+        
 mode: single
