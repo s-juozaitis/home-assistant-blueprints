@@ -1,7 +1,7 @@
 blueprint:
-  name: Moes/Tuya 4-Button Scene Switch (TS0044)
+  name: Moes/Tuya 4-Button Scene Switch (TS0044) - ZHA
   description: >
-    Controls various entities based on single and double press actions from a Moes 4-Button Scene Switch.
+    Controls various entities based on single, double, and long press actions from a Moes 4-Button Scene Switch using ZHA.
   domain: automation
   input:
     switch_device:
@@ -159,66 +159,67 @@ trigger:
     subtype: button_4
     id: button_4_hold
 
+
 action:
   - choose:
       - conditions:
-          - condition: trigger
-            id: button_1_single
+          - condition: template
+            value_template: "{{ trigger.payload == '1_single' }}"
         sequence: !input single_1
 
       - conditions:
-          - condition: trigger
-            id: button_2_single
+          - condition: template
+            value_template: "{{ trigger.payload == '2_single' }}"
         sequence: !input single_2
 
       - conditions:
-          - condition: trigger
-            id: button_3_single
+          - condition: template
+            value_template: "{{ trigger.payload == '3_single' }}"
         sequence: !input single_3
 
       - conditions:
-          - condition: trigger
-            id: button_4_single
+          - condition: template
+            value_template: "{{ trigger.payload == '4_single' }}"
         sequence: !input single_4
 
       - conditions:
-          - condition: trigger
-            id: button_1_double
+          - condition: template
+            value_template: "{{ trigger.payload == '1_double' }}"
         sequence: !input double_1
 
       - conditions:
-          - condition: trigger
-            id: button_2_double
+          - condition: template
+            value_template: "{{ trigger.payload == '2_double' }}"
         sequence: !input double_2
 
       - conditions:
-          - condition: trigger
-            id: button_3_double
+          - condition: template
+            value_template: "{{ trigger.payload == '3_double' }}"
         sequence: !input double_3
 
       - conditions:
-          - condition: trigger
-            id: button_4_double
+          - condition: template
+            value_template: "{{ trigger.payload == '4_double' }}"
         sequence: !input double_4
 
       - conditions:
-          - condition: trigger
-            id: button_1_hold
+          - condition: template
+            value_template: "{{ trigger.payload == '1_hold' }}"
         sequence: !input hold_1
 
       - conditions:
-          - condition: trigger
-            id: button_2_hold
+          - condition: template
+            value_template: "{{ trigger.payload == '2_hold' }}"
         sequence: !input hold_2
 
       - conditions:
-          - condition: trigger
-            id: button_3_hold
+          - condition: template
+            value_template: "{{ trigger.payload == '3_hold' }}"
         sequence: !input hold_3
 
       - conditions:
-          - condition: trigger
-            id: button_4_hold
+          - condition: template
+            value_template: "{{ trigger.payload == '4_hold' }}"
         sequence: !input hold_4
 
 mode: single
